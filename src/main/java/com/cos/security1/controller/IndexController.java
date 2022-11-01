@@ -23,17 +23,20 @@ public class IndexController {
     }
 
     @GetMapping("/user")
-    public @ResponseBody String user() {
+    public @ResponseBody
+    String user() {
         return "user";
     }
 
     @GetMapping("/admin")
-    public @ResponseBody String admin() {
+    public @ResponseBody
+    String admin() {
         return "admin";
     }
 
     @GetMapping("/manager")
-    public @ResponseBody String manager() {
+    public @ResponseBody
+    String manager() {
         return "manager";
     }
 
@@ -58,4 +61,8 @@ public class IndexController {
         return "redirect:/loginForm";
     }
 
+    @GetMapping("/info")
+    public @ResponseBody String info() {
+        return "개인정보";
+    }
 }
