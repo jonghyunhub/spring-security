@@ -27,9 +27,14 @@ public class IndexController {
         return "manager";
     }
 
-    @GetMapping("/login")
-    public @ResponseBody String login() {
-        return "login";
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "loginForm";
+    }
+
+    @GetMapping("/joinForm")
+    public String joinFrom() {
+        return "joinFrom";
     }
 
     @GetMapping("/join")
@@ -37,8 +42,4 @@ public class IndexController {
         return "join";
     }
 
-    @GetMapping("/joinProc")
-    public @ResponseBody String joinProc() {
-        return "회원가입 완료됨";
-    }
 }
