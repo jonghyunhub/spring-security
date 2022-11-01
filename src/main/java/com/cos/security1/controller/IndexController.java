@@ -1,11 +1,21 @@
 package com.cos.security1.controller;
 
+import com.cos.security1.model.User;
+import com.cos.security1.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller //"view를 리턴하겠다"
+@RequiredArgsConstructor
 public class IndexController {
+
+    private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping({"", "/"})
     public String index() {
@@ -33,13 +43,19 @@ public class IndexController {
     }
 
     @GetMapping("/joinForm")
-    public String joinFrom() {
-        return "joinFrom";
+    public String joinForm() {
+        return "joinForm";
     }
 
-    @GetMapping("/join")
-    public @ResponseBody String join() {
-        return "join";
+    @PostMapping("/join")
+    public String join(User user) {
+        user.setRole("ROLE_USER");
+        //시큐리티는 비밀번호 암호화를 안하면 로그인이 안되기때문에 비밀번호 암호화가 필수
+        String rawPassword = user.getPassword();
+        String encPassowrd = bCryptPasswordEncoder.encode(rawPassword);
+        user.setPassword(encPassowrd);
+        userRepository.save(user);
+        return "redirect:/loginForm";
     }
 
 }
