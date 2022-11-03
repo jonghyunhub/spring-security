@@ -19,6 +19,9 @@ public class User {
     private String password;
     private String email;
     private String role;
+
+    private String provider; //google , naver
+    private String providerId; // google, naver 아이디
     @CreationTimestamp
     private Timestamp createDate;
 }
