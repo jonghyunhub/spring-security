@@ -28,13 +28,13 @@ public class IndexController {
     // User 정보를 얻는방법 2가지
     //1. Authentication 객체에서 getPrincipal() 을 가져오고 (PrincipalDetails) 형변환하기
     //2. @AuthenticationPrincipal 에너테이션을 통해 가져오기
-    @GetMapping("/test/login")
-    public @ResponseBody
+
+    @GetMapping("/test/login")public @ResponseBody
     String testLoginTest(Authentication authentication, @AuthenticationPrincipal PrincipalDetails userDetails) {
         System.out.println("/test/login =================");
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         System.out.println("authentication.getPrincipal() = " + principalDetails.getUser());
-        System.out.println("userDetails = " + userDetails.getUsername());
+        System.out.println("userDetails = " + userDetails.getUser());
         return "세션 정보 확인하기";
     }
 
